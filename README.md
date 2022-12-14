@@ -16,7 +16,7 @@ The app ID is used to authenticate your application with the server. Authenticat
 
 TrafficAggregatorSDK is compatible with:
 
-  - iOS 12 or greater.
+  - iOS 11 or greater.
   - Xcode 13+ or greater.
   - Swift 5.3 or greater.
 
