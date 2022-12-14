@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "ios_traffic_aggregator_example",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/loopsocial/ios_traffic_aggregator_example",
+      "state" : {
+        "branch" : "main",
+        "revision" : "0d3f924bcbabf6ce9875898cf0e55859068a3bf4"
+      }
+    }
+  ],
+  "version" : 2
+}
