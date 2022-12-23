@@ -73,26 +73,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 There are is minimum setup before displaying the `TrafficAggregatorWebViewController`.
 
 ```swift
-do {
+
     // 1. Create a new TrafficAggregatorWebViewController with the traffic aggregator url.
-    let webView = try TrafficAggregatorWebViewController(url: url)
+    let webView = TrafficAggregatorWebViewController(url: url)
     
     // 2. Add a payment handler. This will provide 2 way communication between the web view and your app. 
-    webView.setPaymentHandler { paymentURL, paymentComplete in
-        // This handler will be invoked when the user needs to complete a purchase.
-        // The paymentURL will be the URL that triggered the payment handler
-        // The paymentComplete is a completion handler that your app must invoke upon payment completion
-        
-        // Create your payment view controller. In this example, we have a payment controller 
-        // that takes the two parameters passed in the payment handler.
-        let paymentVC = YourPaymentViewController(paymentURL: paymentURL, completionHandler: paymentComplete)
-        webView.present(paymentVC, animated: true)
+    webView.paymentHandler = { [weak webView] paymentURL, paymentComplete in
+        let paymentVC = PaymentViewController(paymentURL: paymentURL, completionHandler: paymentComplete)
+        webView?.present(paymentVC, animated: true)
     }
     
+    // 2.1 (Optional). If you are interested in error describing why TrafficAggregatorWebViewController can't be instantiated.
+    webView.onError = { error in
+        debugPrint(error)
+    }
+
     // 3. Present the web view controller
     present(webView, animated: true)
-} catch {
-    // Error describing why TrafficAggregatorWebViewController can't be instantiated
-    debugPrint(error)
-}
 ```

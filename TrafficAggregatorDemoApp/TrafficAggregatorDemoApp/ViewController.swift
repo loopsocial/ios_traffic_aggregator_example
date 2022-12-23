@@ -13,16 +13,21 @@ class ViewController: UIViewController {
             let url = URL(string: urlString)
         else { return }
         
-        do {
-            let webView = try TrafficAggregatorWebViewController(url: url)
-            webView.setPaymentHandler() { paymentURL, paymentComplete in
-                let paymentVC = PaymentViewController(paymentURL: paymentURL, completionHandler: paymentComplete)
-                webView.present(paymentVC, animated: true)
-            }
-            present(webView, animated: true)
-        } catch {
-            // Error describing why TrafficAggregatorWebViewController can't be instantiated
+        // 1. Create a new TrafficAggregatorWebViewController with the traffic aggregator url.
+        let webView = TrafficAggregatorWebViewController(url: url)
+        
+        // 2. Add a payment handler. This will provide 2 way communication between the web view and your app.
+        webView.paymentHandler = { [weak webView] paymentURL, paymentComplete in
+            let paymentVC = PaymentViewController(paymentURL: paymentURL, completionHandler: paymentComplete)
+            webView?.present(paymentVC, animated: true)
+        }
+        
+        // 2.1 (Optional). If you are interested in error describing why TrafficAggregatorWebViewController can't be instantiated.
+        webView.onError = { error in
             debugPrint(error)
         }
+
+        // 3. Present the web view controller
+        present(webView, animated: true)
     }
 }

@@ -15,8 +15,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "TrafficAggregatorSDK",
-            url: "https://github.com/loopsocial/ios_traffic_aggregator_example/releases/download/v0.3.0/TrafficAggregatorSDK.zip",
-            checksum: "1ade1376ad8627d90d7c88a581a3cc7dc30b4f2454ad1dd9da4c4fd62f92ea8a"
+            url: "https://github.com/loopsocial/ios_traffic_aggregator_example/releases/download/v1.0.0-beta.1/TrafficAggregatorSDK.zip",
+            checksum: "004ea36b2a1829c96fcfcd8f154911d70113cf94ecf63407000fa7643859e944"
         )
     ]
 )
